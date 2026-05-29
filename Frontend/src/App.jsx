@@ -40,7 +40,7 @@ function App() {
   );
 
   const fetchProducts = () => {
-    fetch("https://lvl200-2.onrender.com/api/products")
+    fetch("https://lvl200-3.onrender.com/api/products")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
@@ -54,7 +54,7 @@ function App() {
 
   useEffect(() => {
     if (token) {
-      fetch("https://lvl200-2.onrender.com/api/cart", {
+      fetch("https://lvl200-3.onrender.com/api/cart", {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((res) => res.json())
@@ -84,7 +84,7 @@ function App() {
       return;
     }
 
-    fetch("https://lvl200-2.onrender.com/api/cart", {
+    fetch("https://lvl200-3.onrender.com/api/cart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
