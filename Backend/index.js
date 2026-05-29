@@ -212,6 +212,10 @@ app.post('/api/products', async (req, res) => {
 });
 
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
-});
+
+
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(5000, () => console.log('Server running locally on port 5000'));
+}
+
+export default app; // CRITICAL for Vercel
