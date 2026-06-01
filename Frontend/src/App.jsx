@@ -111,7 +111,7 @@ function App() {
     setUser(null);
     setToken(null);
     setShowAdminModal(false);
-  }
+  };
 
   const filteredProducts =
     activeCategory === "All"
@@ -219,8 +219,13 @@ function App() {
             prices. Ultimate reliability, lightning speed.
           </p>
           <div className="hero-buttons">
+            {/* Change your Explore Deals button to this: */}
             <button
-              onClick={() => scrollIntoView("categories-section")}
+              onClick={() => {
+                document
+                  .querySelector(".categories-section")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
               className="btn-primary"
             >
               Explore Deals
