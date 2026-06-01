@@ -8,7 +8,7 @@ function Cart({ token, onClose }) {
   // Fetch live cart contents from the database when component mounts
   useEffect(() => {
     if (token) {
-      fetch('http://localhost:5000/api/cart', {
+      fetch('/api/cart', {
         headers: { 'Authorization': `Bearer ${token}` }
       })
         .then((res) => {
