@@ -19,7 +19,7 @@ function AdminDashboard({ token, onProductAdded }) {
     e.preventDefault();
     setMessage('');
 
-    fetch('http://localhost:5000/api/products', {
+    fetch('/api/products', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
