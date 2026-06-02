@@ -78,7 +78,9 @@ function Cart({ token, onClose, onCartItemDeleted }) {
                 </div>
                 <div style={styles.itemPrice}>
                   ${(item.price * item.quantity).toLocaleString(undefined, { minimumFractionDigits: 2 })}
-                  <button onClick={() => handleDeleteItem(item.productId)}>Delete</button>
+                  <button style={styles.deleteBtn} onClick={() => onCartItemDeleted(item.productId)}>
+                    Delete
+                  </button>
                 </div>
               </div>
             ))
