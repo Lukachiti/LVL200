@@ -26,18 +26,7 @@ function AdminDashboard({ token, onProductAdded }) {
         setLoading(false);
       });
   };
-  const filteredProducts =
-    activeCategory === "All"
-      ? products
-      : products.filter((p) => p.category === activeCategory);
-
-  if (loading) {
-    return (
-      <div className="global-loading-screen">
-        <h2>Syncing with secure core database...</h2>
-      </div>
-    );
-  }
+  
   
 
   const handleChange = (e) => {
@@ -97,7 +86,7 @@ function AdminDashboard({ token, onProductAdded }) {
 
   return (
     <>
-    {filteredProducts.map((product) => (
+    {products.map((product) => (
                 <div key={product._id || product.id} className="product-card">
                   <div className="product-image-wrapper">
                     {product.tag && (
