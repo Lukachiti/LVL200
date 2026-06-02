@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {filteredProducts} from App.jsx;
 
 function AdminDashboard({ token, onProductAdded }) {
   const [formData, setFormData] = useState({
@@ -13,6 +14,26 @@ function AdminDashboard({ token, onProductAdded }) {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handleDeleteProduct = (product) => {
+    if (!window.confirm(`Are you sure you want to delete "${product.name}"? This action cannot be undone.`)) return;
+    fetch(`/api/products/${product._id || product.id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message || 'Failed to delete product');
+        return data;
+      })
+      .then(() => {
+        setMessage('Component successfully deleted from database!');
+      })
+      .catch((err) => {
+        setMessage(`Error: ${err.message}`);
+      });
   };
 
   const handleSubmit = (e) => {
@@ -47,8 +68,45 @@ function AdminDashboard({ token, onProductAdded }) {
   };
 
   return (
+    <>
+    {filteredProducts.map((product) => (
+                <div key={product._id || product.id} className="product-card">
+                  <div className="product-image-wrapper">
+                    {product.tag && (
+                      <span className="product-badge">{product.tag}</span>
+                    )}
+                    <img
+                      src={
+                        product.image ||
+                        "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400"
+                      }
+                      alt={product.name}
+                      className="product-image"
+                    />
+                  </div>
+                  <div className="product-info">
+                    <span className="product-cat">{product.category}</span>
+                    <h3 className="product-title">{product.name}</h3>
+                    <div className="product-meta">
+                      <span className="product-rating">
+                        ⭐ {product.rating || "5.0"}
+                      </span>
+                      <span className="product-price">
+                        ${product.price?.toLocaleString()}
+                      </span>
+                    </div>
+                    <button
+                      className="add-to-cart-btn"
+                      onClick={() => handleDeleteProduct(product)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
     <div style={{ background: '#1c2333', padding: '2rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)', color: '#fff', marginTop: '2rem' }}>
       <h2 style={{ color: '#00f2fe', marginBottom: '1.5rem' }}>🔧 AMEX Inventory Management System</h2>
+
       
       {message && <div style={{ marginBottom: '1rem', padding: '0.75rem', borderRadius: '6px', backgroundColor: 'rgba(255,255,255,0.05)' }}>{message}</div>}
 
@@ -97,6 +155,7 @@ function AdminDashboard({ token, onProductAdded }) {
         </button>
       </form>
     </div>
+    </>
   );
 }
 

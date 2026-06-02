@@ -180,6 +180,8 @@ app.post('/api/auth/login', async (req, res) => {
 });
 
 
+
+
 // ================= HARDWARE STORE ROUTES =================
 
 app.get('/api/products', async (req, res) => {
@@ -211,6 +213,19 @@ app.post('/api/products', async (req, res) => {
   }
 });
 
+// Secure Admin Only Route to Delete Products
+app.delete('/api/products/:id', async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) return res.status(401).json({ message: 'Access denied. No token provided.' });
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (!decoded.isAdmin) return res.status(403).json({ message: 'Access denied. Admins only.' });
+    await Product.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: 'Product successfully deleted' });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to delete product', error: error.message });
+  } 
+});
 
 
 
