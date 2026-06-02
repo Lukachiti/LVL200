@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {filteredProducts} from App.jsx;
+
 
 function AdminDashboard({ token, onProductAdded }) {
   const [formData, setFormData] = useState({
@@ -10,7 +10,35 @@ function AdminDashboard({ token, onProductAdded }) {
     image: '',
     tag: ''
   });
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
   const [message, setMessage] = useState('');
+  const fetchProducts = () => {
+    fetch("/api/products")
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Fetch failure:");
+        setLoading(false);
+      });
+  };
+  const filteredProducts =
+    activeCategory === "All"
+      ? products
+      : products.filter((p) => p.category === activeCategory);
+
+  if (loading) {
+    return (
+      <div className="global-loading-screen">
+        <h2>Syncing with secure core database...</h2>
+      </div>
+    );
+  }
+  
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
