@@ -78,6 +78,9 @@ function App() {
   const handleProductDeleted = (deletedProduct) => {
     setProducts((prev) => prev.filter((p) => p._id !== deletedProduct._id && p.id !== deletedProduct.id));
   };
+    const handleCartItemDeleted = (deletedProductId) => {
+    setCartItems((prev) => prev.filter((item) => item.productId !== deletedProductId));
+  }
 
   const handleAddToCart = (product) => {
     if (!user || !token) {
@@ -212,7 +215,7 @@ function App() {
 
       {/* Cart Modal Overlay */}
       {showCartModal && (
-        <Cart token={token} onClose={() => setShowCartModal(false)} />
+        <Cart token={token} onClose={() => setShowCartModal(false)} onCartItemDeleted={handleCartItemDeleted} />
       )}
 
       {/* Hero Banner Section */}

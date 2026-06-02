@@ -226,7 +226,26 @@ app.delete('/api/products/:id', async (req, res) => {
     res.status(500).json({ message: 'Failed to delete product', error: error.message });
   } 
 });
+app.delete('/api/cart/item/:productId', async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) return res.status(401).json({ message: 'Access denied. No token provided.' });
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decoded.id;
+    const { productId } = req.params;
 
+    const cart = await Cart.findOne({ userId });
+    if (!cart) return res.status(404).json({ message: 'Cart not found' });
+    const itemIndex = cart.items.findIndex(item => item.productId.toString() === productId);
+    if (itemIndex === -1) return res.status(404).json({ message: 'Item not found in cart' });
+    cart.items.splice(itemIndex, 1);
+    await cart.save();
+
+    res.status(200).json({ message: 'Item successfully removed from cart' });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to remove item from cart', error: error.message });
+  }
+});
 
 
 if (process.env.NODE_ENV !== 'production') {

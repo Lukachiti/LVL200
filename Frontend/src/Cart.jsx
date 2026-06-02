@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-function Cart({ token, onClose }) {
+function Cart({ token, onClose, onCartItemDeleted }) {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState('');
-
+  
   // Fetch live cart contents from the database when component mounts
   useEffect(() => {
     if (token) {
@@ -78,6 +78,7 @@ function Cart({ token, onClose }) {
                 </div>
                 <div style={styles.itemPrice}>
                   ${(item.price * item.quantity).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                  <button onClick={() => handleDeleteItem(item.productId)}>Delete</button>
                 </div>
               </div>
             ))
