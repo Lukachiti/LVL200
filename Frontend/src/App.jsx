@@ -75,6 +75,10 @@ function App() {
     setProducts((prev) => [newProduct, ...prev]);
   };
 
+  const handleProductDeleted = (deletedProduct) => {
+    setProducts((prev) => prev.filter((p) => p._id !== deletedProduct._id && p.id !== deletedProduct.id));
+  };
+
   const handleAddToCart = (product) => {
     if (!user || !token) {
       setAuthError(
@@ -125,6 +129,7 @@ function App() {
       </div>
     );
   }
+  
 
   return (
     <div className="store-container">
@@ -197,9 +202,10 @@ function App() {
               >
                 ✕
               </button>
+
             </div>
             <div className="modal-divider"></div>
-            <AdminDashboard token={token} onProductAdded={handleProductAdded} />
+            <AdminDashboard token={token} onProductAdded={handleProductAdded}  onProductDeleted={handleProductDeleted} />
           </div>
         </div>
       )}
