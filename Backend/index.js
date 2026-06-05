@@ -59,7 +59,7 @@ app.post('/api/cart', async (req, res) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decoded.id;
 
-    const { productId, name, price, image, category } = req.body;
+    const { productId, name, price, image, category, description } = req.body;
 
     // 3. Find the user's cart or create a brand new one if it doesn't exist yet
     let cart = await Cart.findOne({ userId });
@@ -76,7 +76,7 @@ app.post('/api/cart', async (req, res) => {
       cart.items[itemIndex].quantity += 1;
     } else {
       // If it's a new item, push the whole product object into the array
-      cart.items.push({ productId, name, price, image, category, quantity: 1 });
+      cart.items.push({ productId, name, price, image, category, description, quantity: 1 });
     }
 
     await cart.save();
@@ -104,6 +104,7 @@ app.get('/api/cart', async (req, res) => {
 // Product Schema
 const productSchema = new mongoose.Schema({
   name: { type: String, required: true },
+  description: String,
   category: String,
   price: Number,
   rating: Number,

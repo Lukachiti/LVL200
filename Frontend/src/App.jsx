@@ -15,7 +15,7 @@ const CATEGORIES = [
 ];
 
 function App() {
-  //fix states
+  
   const [products, setProducts] = useState([]);
   const [activeCategory, setActiveCategory] = useState("All");
   const [cartItems, setCartItems] = useState([]);
