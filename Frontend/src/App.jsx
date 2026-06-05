@@ -289,7 +289,7 @@ function App() {
                   <span className="product-rating">
                     ⭐ {product.rating || "5.0"}
                   </span>
-                  <span className="product-price">
+                  <span className="product-price" style={{ color: product.tag ? "#4CAF50" : "#ffffff", fontWeight: "bold" }}>
                     ${product.price?.toLocaleString()}
                   </span>
                 </div>
