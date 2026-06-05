@@ -84,16 +84,7 @@ function AuthModal({ isRegisterMode, setIsRegisterMode, authFormData, setAuthFor
             className="auth-input"
           />
 
-          {isRegisterMode && (
-            <label className="auth-checkbox-label">
-              <input
-                type="checkbox"
-                name="isAdmin"
-                onChange={handleAuthInputChange}
-              />
-              Register account with Admin Authorization status?
-            </label>
-          )}
+         
 
           <button type="submit" className="auth-submit-btn">
             {isRegisterMode ? "Sign Up" : "Log In"}

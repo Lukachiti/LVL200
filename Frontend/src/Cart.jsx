@@ -4,6 +4,7 @@ function Cart({ token, onClose, onCartItemDeleted }) {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
   
   // Fetch live cart contents from the database when component mounts
   useEffect(() => {

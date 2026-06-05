@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 function AdminDashboard({ token, onProductAdded, onProductDeleted }) {
   const [formData, setFormData] = useState({
     name: '',
+    description: '',
     category: 'CPUs',
+    
     price: '',
     rating: '5.0',
     image: '',
@@ -58,7 +60,7 @@ function AdminDashboard({ token, onProductAdded, onProductDeleted }) {
       })
       .then((newProduct) => {
         setMessage('✅ Component successfully uploaded to database!');
-        setFormData({ name: '', category: 'CPUs', price: '', rating: '5.0', image: '', tag: '' });
+        setFormData({ name: '', description: '', category: 'CPUs', price: '', rating: '5.0', image: '', tag: '' });
         
         // Update dashboard view state
         setProducts((prev) => [newProduct, ...prev]);
@@ -127,6 +129,10 @@ function AdminDashboard({ token, onProductAdded, onProductDeleted }) {
             </select>
           </div>
           <div>
+            <label style={{ display: 'block', marginBottom: '0.4rem', color: '#9ca3af' }}>Description</label>
+            <input type="text" name="description" value={formData.description} onChange={handleChange} style={{ width: '100%', padding: '0.75rem', background: '#121826', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', borderRadius: '6px' }} placeholder="Enter a brief description of the component..." />
+          </div>
+          <div>
             <label style={{ display: 'block', marginBottom: '0.4rem', color: '#9ca3af' }}>Price ($ USD)</label>
             <input type="number" step="0.01" name="price" value={formData.price} onChange={handleChange} required style={{ width: '100%', padding: '0.75rem', background: '#121826', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', borderRadius: '6px' }} placeholder="999.99" />
           </div>
@@ -169,6 +175,7 @@ function AdminDashboard({ token, onProductAdded, onProductDeleted }) {
                 />
                 <span style={{ fontSize: '0.75rem', color: '#4facfe', textTransform: 'uppercase', fontWeight: 'bold' }}>{product.category}</span>
                 <h4 style={{ margin: '0.2rem 0', fontSize: '0.95rem', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', minHeight: '2.4rem' }}>{product.name}</h4>
+                <p style={{ fontSize: '0.85rem', color: '#9ca3af', height: '2.4rem', overflow: 'hidden', textOverflow: 'ellipsis' }}>{product.description || 'No description provided.'}</p>
                 <p style={{ margin: '0.4rem 0', fontWeight: 'bold', color: '#00f2fe' }}>${product.price?.toLocaleString()}</p>
               </div>
               <button

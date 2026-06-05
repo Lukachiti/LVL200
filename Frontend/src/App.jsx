@@ -78,7 +78,7 @@ function App() {
   const handleProductDeleted = (deletedProduct) => {
     setProducts((prev) => prev.filter((p) => p._id !== deletedProduct._id && p.id !== deletedProduct.id));
   };
-    const handleCartItemDeleted = (deletedProductId) => {
+  const handleCartItemDeleted = (deletedProductId) => {
     setCartItems((prev) => prev.filter((item) => item.productId !== deletedProductId));
   }
 
@@ -100,6 +100,7 @@ function App() {
       body: JSON.stringify({
         productId: product._id || product.id,
         name: product.name,
+        description: product.description,
         price: product.price,
         image: product.image,
         category: product.category,
@@ -283,6 +284,7 @@ function App() {
               <div className="product-info">
                 <span className="product-cat">{product.category}</span>
                 <h3 className="product-title">{product.name}</h3>
+                <p className="product-description">{product.description}</p>
                 <div className="product-meta">
                   <span className="product-rating">
                     ⭐ {product.rating || "5.0"}
