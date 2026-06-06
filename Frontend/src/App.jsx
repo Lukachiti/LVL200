@@ -15,7 +15,6 @@ const CATEGORIES = [
 ];
 
 function App() {
-  
   const [products, setProducts] = useState([]);
   const [activeCategory, setActiveCategory] = useState("All");
   const [cartItems, setCartItems] = useState([]);
@@ -38,7 +37,7 @@ function App() {
     (acc, item) => acc + item.quantity,
     0,
   );
-  if (showAdminModal || showCartModal || showAuthModal) {
+  if (showAuthModal) {
     document.body.style.overflow = "hidden";
   } else {
     document.body.style.overflow = "auto";
@@ -81,11 +80,17 @@ function App() {
   };
 
   const handleProductDeleted = (deletedProduct) => {
-    setProducts((prev) => prev.filter((p) => p._id !== deletedProduct._id && p.id !== deletedProduct.id));
+    setProducts((prev) =>
+      prev.filter(
+        (p) => p._id !== deletedProduct._id && p.id !== deletedProduct.id,
+      ),
+    );
   };
   const handleCartItemDeleted = (deletedProductId) => {
-    setCartItems((prev) => prev.filter((item) => item.productId !== deletedProductId));
-  }
+    setCartItems((prev) =>
+      prev.filter((item) => item.productId !== deletedProductId),
+    );
+  };
 
   const handleAddToCart = (product) => {
     if (!user || !token) {
@@ -138,7 +143,6 @@ function App() {
       </div>
     );
   }
-  
 
   return (
     <div className="store-container">
@@ -201,27 +205,21 @@ function App() {
       )}
 
       {showAdminModal && (
-        <div className="modal-overlay">
-          <div className="modal-container">
-            <div className="modal-header">
-              <h2 className="modal-title">Admin Inventory Control</h2>
-              <button
-                onClick={() => setShowAdminModal(false)}
-                className="modal-close-btn"
-              >
-                ✕
-              </button>
-
-            </div>
-            <div className="modal-divider"></div>
-            <AdminDashboard token={token} onProductAdded={handleProductAdded}  onProductDeleted={handleProductDeleted} />
-          </div>
-        </div>
+        <AdminDashboard
+          token={token}
+          onProductAdded={handleProductAdded}
+          onProductDeleted={handleProductDeleted}
+        />
       )}
 
       {/* Cart Modal Overlay */}
       {showCartModal && (
-        <Cart style={{ position: 'absolute', top: 0 }} token={token} onClose={() => setShowCartModal(false)} onCartItemDeleted={handleCartItemDeleted} />
+        <Cart
+          style={{ position: "absolute", top: 0 }}
+          token={token}
+          onClose={() => setShowCartModal(false)}
+          onCartItemDeleted={handleCartItemDeleted}
+        />
       )}
 
       {/* Hero Banner Section */}
@@ -294,7 +292,13 @@ function App() {
                   <span className="product-rating">
                     ⭐ {product.rating || "5.0"}
                   </span>
-                  <span className="product-price" style={{ color: product.tag ? "#4CAF50" : "#ffffff", fontWeight: "bold" }}>
+                  <span
+                    className="product-price"
+                    style={{
+                      color: product.tag ? "#4CAF50" : "#ffffff",
+                      fontWeight: "bold",
+                    }}
+                  >
                     ${product.price?.toLocaleString()}
                   </span>
                 </div>

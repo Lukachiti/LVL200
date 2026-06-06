@@ -1,7 +1,14 @@
-function AuthModal({ isRegisterMode, setIsRegisterMode, authFormData, setAuthFormData, setToken, setUser, setShowAuthModal, setAuthError }) {
-    
-  
-    const handleLogout = () => {
+function AuthModal({
+  isRegisterMode,
+  setIsRegisterMode,
+  authFormData,
+  setAuthFormData,
+  setToken,
+  setUser,
+  setShowAuthModal,
+  setAuthError,
+}) {
+  const handleLogout = () => {
     setUser(null);
     setToken(null);
     setShowAdminModal(false);
@@ -83,8 +90,6 @@ function AuthModal({ isRegisterMode, setIsRegisterMode, authFormData, setAuthFor
             onChange={handleAuthInputChange}
             className="auth-input"
           />
-
-         
 
           <button type="submit" className="auth-submit-btn">
             {isRegisterMode ? "Sign Up" : "Log In"}
