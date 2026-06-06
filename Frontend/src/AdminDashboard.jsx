@@ -105,8 +105,8 @@ function AdminDashboard({ token, onProductAdded, onProductDeleted }) {
   };
 
   return (
-    <div style={{ background: '#1c2333', padding: '2rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)', color: '#fff' }}>
-      <h2 style={{ color: '#00f2fe', marginBottom: '1.5rem' }}>🔧 AMEX Inventory Management System</h2>
+    <div style={{position: 'fixed', top: '0', right: '0',  background: '#1c2333', padding: '2rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)', color: '#fff' }}>
+      <h2 style={{ color: '#00f2fe', marginBottom: '1.5rem' }}>AMex Inventory Management</h2>
 
       {message && <div style={{ marginBottom: '1rem', padding: '0.75rem', borderRadius: '6px', backgroundColor: 'rgba(255,255,255,0.05)' }}>{message}</div>}
 

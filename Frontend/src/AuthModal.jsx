@@ -48,7 +48,7 @@ function AuthModal({ isRegisterMode, setIsRegisterMode, authFormData, setAuthFor
   };
 
   return (
-    <div s className="auth-modal-overlay">
+    <div className="auth-modal-overlay">
       <div className="auth-modal-card">
         <h2 className="auth-title">
           {isRegisterMode ? "Create Account" : "Sign In"}

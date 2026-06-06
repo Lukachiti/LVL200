@@ -199,7 +199,7 @@ function App() {
         <div className="modal-overlay">
           <div className="modal-container">
             <div className="modal-header">
-              <h2 className="modal-title">🔧 Admin Inventory Control</h2>
+              <h2 className="modal-title">Admin Inventory Control</h2>
               <button
                 onClick={() => setShowAdminModal(false)}
                 className="modal-close-btn"
