@@ -35,6 +35,8 @@ const cartSchema = new mongoose.Schema({
     {
       productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
       name: String,
+      description: String,
+
       price: Number,
       image: String,
       category: String,
@@ -46,7 +48,7 @@ const cartSchema = new mongoose.Schema({
 const Cart = mongoose.model('Cart', cartSchema);
 
 
-// ================= ADD THIS TO SECTION #5 (ROUTES) =================
+
 
 // Route C: Sync/Save items to a User's Cloud Cart (Protected Route)
 app.post('/api/cart', async (req, res) => {
@@ -227,16 +229,18 @@ app.delete('/api/products/:id', async (req, res) => {
     res.status(500).json({ message: 'Failed to delete product', error: error.message });
   } 
 });
+
 app.delete('/api/cart/item/:productId', async (req, res) => {
-  try {
+   try {
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) return res.status(401).json({ message: 'Access denied. No token provided.' });
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decoded.id;
-    const { productId } = req.params;
+    const productId = req.params.productId;
 
     const cart = await Cart.findOne({ userId });
     if (!cart) return res.status(404).json({ message: 'Cart not found' });
+
     const itemIndex = cart.items.findIndex(item => item.productId.toString() === productId);
     if (itemIndex === -1) return res.status(404).json({ message: 'Item not found in cart' });
     cart.items.splice(itemIndex, 1);

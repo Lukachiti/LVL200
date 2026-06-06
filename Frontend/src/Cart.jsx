@@ -160,6 +160,17 @@ const styles = {
     fontSize: '1.4rem',
     fontWeight: '600',
   },
+  deleteBtn: {
+    marginLeft: '1rem',
+    padding: '0.25rem 0.5rem',
+    background: 'rgba(255, 0, 0, 0.1)',
+    border: 'none',
+    color: '#ff4d4d',
+    fontSize: '0.8rem',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    transition: '0.2s',
+  },
   closeBtn: {
     background: 'none',
     border: 'none',
