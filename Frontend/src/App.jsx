@@ -216,7 +216,7 @@ function App() {
 
       {/* Cart Modal Overlay */}
       {showCartModal && (
-        <Cart token={token} onClose={() => setShowCartModal(false)} onCartItemDeleted={handleCartItemDeleted} />
+        <Cart style={{ position: 'absolute', top: 0 }} token={token} onClose={() => setShowCartModal(false)} onCartItemDeleted={handleCartItemDeleted} />
       )}
 
       {/* Hero Banner Section */}
