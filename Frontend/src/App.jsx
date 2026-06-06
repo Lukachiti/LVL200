@@ -38,6 +38,11 @@ function App() {
     (acc, item) => acc + item.quantity,
     0,
   );
+  if (showAdminModal || showCartModal || showAuthModal) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
 
   const fetchProducts = () => {
     fetch("/api/products")

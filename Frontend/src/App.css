@@ -279,7 +279,7 @@ button ::hover {
   z-index: 1000;
   display: flex;
   justify-content: center;
-  top: 10%;
+  top: 0;
 }
 
 .auth-modal-card {
@@ -287,7 +287,9 @@ button ::hover {
   padding: 2.5rem;
   border-radius: 10px;
   width: 400px;
-  max-height: 550px;
+  max-height: 300px;
+  position: fixed;
+  top: 10%;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
