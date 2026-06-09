@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
 import AdminDashboard from './AdminDashboard';
-import Cart from './Cart';
+import Cart from './cart';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
