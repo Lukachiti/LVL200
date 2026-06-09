@@ -81,7 +81,7 @@ body {
 .clickable-link {
   cursor: pointer;
 }
-button ::hover {
+button :hover {
   cursor: pointer;
 }
 
