@@ -3,7 +3,7 @@ import "./App.css";
 import AdminDashboard from "./AdminDashboard";
 import Cart from "./Cart";
 import AuthModal from "./AuthModal";
-
+import { Link } from "react-router-dom";
 const CATEGORIES = [
   "All",
   "CPUs",
@@ -19,8 +19,8 @@ function App() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showCartModal, setShowCartModal] = useState(false);
-  const [showAdminModal, setShowAdminModal] = useState(false);
+  
+ 
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -128,7 +128,7 @@ function App() {
   const handleLogout = () => {
     setUser(null);
     setToken(null);
-    setShowAdminModal(false);
+    
   };
 
   const filteredProducts =
@@ -149,13 +149,17 @@ function App() {
       {/* Navigation Bar */}
       <nav className="navbar">
         <div className="nav-logo">
-          <h1 className="logo-text">Amex</h1>
+          {/* Clicking the logo will now take the user back to the homepage */}
+          <Link to="/" className="logo-link">
+            <h1 className="logo-text">Amex</h1>
+          </Link>
         </div>
 
         <div className="nav-links">
           <a href="#support" className="nav-link">
             Support
           </a>
+
           {user ? (
             <span
               className="nav-link nav-link-highlight"
@@ -164,6 +168,7 @@ function App() {
               Logout ({user.username})
             </span>
           ) : (
+            /* Keep this as a modal trigger since an auth popup works great on any page */
             <span
               className="nav-link clickable-link"
               onClick={() => setShowAuthModal(true)}
@@ -171,22 +176,21 @@ function App() {
               Account
             </span>
           )}
+
           <a href="#brands" className="nav-link">
             Brands
           </a>
-          <span
-            className="nav-link clickable-link"
-            onClick={() => setShowCartModal(true)}
-          >
+
+          {/* Dedicated page link for the shopping cart */}
+          <Link to="/cart" className="nav-link">
             Cart ({totalCartCount})
-          </span>
+          </Link>
+
+          {/* Dedicated page link for the admin inventory panel */}
           {user?.isAdmin && (
-            <span
-              onClick={() => setShowAdminModal(true)}
-              className="nav-link nav-link-admin"
-            >
+            <Link to="/admin" className="nav-link nav-link-admin">
               Admin Panels
-            </span>
+            </Link>
           )}
         </div>
       </nav>
@@ -204,23 +208,7 @@ function App() {
         />
       )}
 
-      {showAdminModal && (
-        <AdminDashboard
-          token={token}
-          onProductAdded={handleProductAdded}
-          onProductDeleted={handleProductDeleted}
-        />
-      )}
-
-      {/* Cart Modal Overlay */}
-      {showCartModal && (
-        <Cart
-          style={{ position: "absolute", top: 0 }}
-          token={token}
-          onClose={() => setShowCartModal(false)}
-          onCartItemDeleted={handleCartItemDeleted}
-        />
-      )}
+      
 
       {/* Hero Banner Section */}
       <header className="hero-banner">

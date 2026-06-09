@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function AdminDashboard({ token, onProductAdded, onProductDeleted, setShowAdminModal }) {
+function AdminDashboard({ token, onProductAdded, onProductDeleted}) {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -130,12 +130,8 @@ function AdminDashboard({ token, onProductAdded, onProductDeleted, setShowAdminM
       <h2 style={{ color: "#00f2fe", marginBottom: "1.5rem" }}>
         AMex Inventory Management
       </h2>
-      <button
-        onClick={() => setShowAdminModal(false)}
-        className="modal-close-btn"
-      >
-        ✕
-      </button>
+      
+      
 
       {message && (
         <div
