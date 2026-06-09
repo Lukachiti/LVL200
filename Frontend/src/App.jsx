@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import AdminDashboard from "./AdminDashboard";
-import Cart from "./cart";
+import Cart from "./Cart";
 import AuthModal from "./AuthModal";
 import { Link } from "react-router-dom";
 const CATEGORIES = [

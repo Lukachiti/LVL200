@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./cart.css";
+import "./Cart.css";
 
 function Cart({ token, onCartItemDeleted }) {
   const [cartItems, setCartItems] = useState([]);
