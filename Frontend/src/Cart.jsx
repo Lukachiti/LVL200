@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./Cart.css";
+
 //pls work
 
 function Cart({ token, onCartItemDeleted }) {
